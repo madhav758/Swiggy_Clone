@@ -6,9 +6,11 @@ import { IoHelpBuoySharp } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { IoCartSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 
 function Header() {
+    let cartItems = useSelector((store) => store.cart.items);
     return (
         <div>
 
@@ -33,7 +35,7 @@ function Header() {
                     </div>
                     <div className='m-4 flex'>
                         <span className='mt-1' ><IoCartSharp /></span>
-                        <Link to='/cart'> <li className='px-2'>Cart</li></Link>
+                        <Link to='/cart'> <li className='px-2'>Cart- {cartItems.length}</li></Link>
                     </div>
                 </ul>
 

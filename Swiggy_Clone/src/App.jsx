@@ -1,19 +1,22 @@
-import React from 'react'
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Body from './components/Body';
-import { Outlet } from 'react-router-dom';
-
+import { Outlet } from "react-router-dom";
+import ApiCalling from "./components/ApiCalling";
+import Body from "./components/Body";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import { Provider } from "react-redux";
+import appStore from "./components/utils/appStore";
 
 function App() {
   return (
-    <div>
-      <Header />
-      {/* <Body /> */}
-      <Outlet />
-      <Footer />
-
-    </div>
+    <Provider store={appStore}>
+      <div>
+        {/* <ApiCalling /> */}
+        <Header />
+        {/* <Body /> */}
+        <Outlet />
+        <Footer />
+      </div>
+    </Provider>
   )
 }
 
