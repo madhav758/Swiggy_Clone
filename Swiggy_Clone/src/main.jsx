@@ -11,6 +11,7 @@ import Signin from './components/Signin.jsx'
 import Error from './components/Error.jsx'
 import RestaurantDetails from './components/RestaurantDetails.jsx'
 import Clock from './components/Clock.jsx'
+import Login from './components/Login.jsx'
 
 const appRouter = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/clock",
         element: <Clock />
+      },
+      {
+        path: "/login",
+        element: <Login />
       },
     ]
   }

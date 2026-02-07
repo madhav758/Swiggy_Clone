@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { IoSearchOutline } from "react-icons/io5";
 import { BiSolidOffer } from "react-icons/bi";
 import { IoHelpBuoySharp } from "react-icons/io5";
@@ -7,10 +7,20 @@ import { CgProfile } from "react-icons/cg";
 import { IoCartSharp } from "react-icons/io5";
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Login from './Login';
 
 
 function Header() {
     let cartItems = useSelector((store) => store.cart.items);
+    const [isVisible, setIsVisible] = useState(false);
+
+    function openModal() {
+        setIsVisible(true);
+    }
+
+    function closeModal() {
+        setIsVisible(false);
+    }
     return (
         <div>
 
@@ -29,15 +39,16 @@ function Header() {
                         <span className='mt-1' >< IoHelpBuoySharp /></span>
                         <Link to='/help'> <li className='px-2'>Help</li></Link>
                     </div>
-                    <div className='m-4 flex'>
+                    <div className='m-4 flex cursor-pointer' onClick={openModal}>
                         <span className='mt-1' ><CgProfile /></span>
-                        <Link to='/signin'> <li className='px-2'>Sign in</li></Link>
+                        <li className='px-2'>Sign in</li>
                     </div>
                     <div className='m-4 flex'>
                         <span className='mt-1' ><IoCartSharp /></span>
                         <Link to='/cart'> <li className='px-2'>Cart- {cartItems.length}</li></Link>
                     </div>
                 </ul>
+                <Login isVisible={isVisible} onClose={closeModal}></Login>
 
             </nav>
         </div>
