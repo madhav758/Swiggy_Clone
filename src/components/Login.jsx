@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from "react";
 
 function Login(props) {
     const [fullName, setFullName] = useState("");
@@ -29,7 +29,7 @@ function Login(props) {
     }
 
     function handleLogin() {
-        const response = fetch("https://swiggy-clone-backend-2xfv.onrender.com/api/login", {
+        const response = fetch("https://swiggy-clone-backend-2xfv.onrender.com//api/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -47,6 +47,7 @@ function Login(props) {
             setPassword("")
         })
     }
+
     return (
         <div
             // eslint-disable-next-line react/prop-types
@@ -190,7 +191,7 @@ function Login(props) {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
-export default Login
+export default Login;
