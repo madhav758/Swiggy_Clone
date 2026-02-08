@@ -6,46 +6,82 @@ function Login(props) {
     const [password, setPassword] = useState("");
     const [isSignUp, setIsSignUp] = useState(true);
 
-    function handleRegister() {
-        const response = fetch("https://swiggy-clone-backend-2xfv.onrender.com/api/register", {
+    async function handleRegister(e) {
+        e.preventDefault();
+        const response = await fetch("https://swiggy-clone-backend-2xfv.onrender.com/api/register", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json",
+                "Content-Type": "application/json"
             },
-            body: JSON.stringify({
-                fullName: fullName,
-                email: email,
-                password: password
-            }),
+            body: JSON.stringify({ fullName, email, password })
         });
-        const result = response.then((data) => data.json());
-        result.then((data) => {
-            console.log(data, "data register");
-            alert("Registered successfully")
-            setEmail("")
-            setPassword("")
-            setFullName("")
-        })
+        const result = await response.json();
+        console.log(result);
+        alert("User Registered")
+        setEmail("")
+        setPassword("")
+        setFullName("")
+
+        // const response = fetch("https://swiggy-clone-backend-2xfv.onrender.com/api/register", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({
+        //         fullName: fullName,
+        //         email: email,
+        //         password: password
+        //     }),
+        // });
+        // const result = response.then((data) => data.json());
+        // result.then((data) => {
+        //     console.log(data, "data register");
+        //     alert("Registered successfully")
+        //     setEmail("")
+        //     setPassword("")
+        //     setFullName("")
+        // })
     }
 
-    function handleLogin() {
-        const response = fetch("https://swiggy-clone-backend-2xfv.onrender.com//api/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            }),
-        });
-        const result = response.then((data) => data.json());
-        result.then((data) => {
-            console.log(data, "data login");
-            alert("Login successfully")
-            setEmail("")
-            setPassword("")
-        })
+    async function handleLogin(e) {
+        try {
+            e.preventDefault(); // Prevent page reload
+            const response = await fetch("https://swiggy-clone-backend-2xfv.onrender.com/api/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password }),
+            });
+            const result = await response.json();
+            if (response.ok) {
+                console.log(result);
+                alert("Login successfully")
+                setEmail("")
+                setPassword("")
+
+            } else {
+                alert(result.message || "Login failed. Check your credentials.");
+            }
+            // const response = fetch("https://swiggy-clone-backend-2xfv.onrender.com/api/login", {
+            //     method: "POST",
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify({
+            //         email: email,
+            //         password: password
+            //     }),
+            // });
+            // const result = response.then((data) => data.json());
+            // result.then((data) => {
+            //     console.log(data, "data login");
+            //     alert("Login successfully")
+            //     setEmail("")
+            //     setPassword("")
+            // })
+        } catch (error) {
+            console.error("Login Error:", error);
+            alert("Server is currently unreachable.");
+        }
     }
 
     return (
